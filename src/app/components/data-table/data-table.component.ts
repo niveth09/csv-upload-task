@@ -114,9 +114,9 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
             ? this.isValidGPA(i, 5, currentRecord[5].trim())
             : currentRecord[5];
         csvArr.push(csvRecord);
+        if (this.currentErrorCount == 0) this.sharedService.correctCount++;
       }
       // }
-      if (this.currentErrorCount == 0) this.sharedService.correctCount++;
     }
     return csvArr;
   };
