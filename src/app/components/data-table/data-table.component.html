@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="d-flex justify-content-end">
+    <button
+      class="btn btn-primary p-2 text-center m-5"
+      (click)="onHandleNavigateCheck()"
+    >
+      Analyze the file
+    </button>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Number</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">City</th>
+        <th scope="col">Address</th>
+        <th scope="col">GPA</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(student of records;track student;let i= $index ){
+      <tr>
+        <td>
+          <span>{{ i + 1 }}</span>
+        </td>
+
+        <td>
+          <span>{{ student.name }}</span>
+          <span class="error"></span>
+        </td>
+        <td>
+          <span>{{ student.email }}</span>
+        </td>
+        <td>
+          <span>{{ student.phoneNumber }}</span>
+        </td>
+        <td>
+          <span>{{ student.city }}</span>
+        </td>
+        <td>
+          <span>{{ student.address }}</span>
+        </td>
+        <td>
+          <span>{{ student.gpa }}</span>
+        </td>
+      </tr>
+
+      } @empty {
+      <div class="">
+        <div>No records yet!</div>
+      </div>
+      }
+    </tbody>
+  </table>
+</div>

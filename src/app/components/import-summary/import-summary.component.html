@@ -1,0 +1,15 @@
+<div class="container m-5 p-4 border rounded-3">
+  <div class="row">
+    <div class="col-md-6">Success</div>
+    <div class="col-md-6">{{ correctCount }}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">Error</div>
+    <div class="col-md-6">{{ errorCount }}</div>
+  </div>
+  @for(error of errorsList;track error){
+  <div class="alert alert-danger">
+    {{ error }}
+  </div>
+  }
+</div>

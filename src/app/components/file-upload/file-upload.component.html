@@ -1,0 +1,45 @@
+<div class="file-upload container mt-5 p-5">
+  @if(notAcceptedDataType){
+  <div class="alert alert-danger" role="alert">
+    Please upload .csv files only!
+  </div>
+  }
+  <p class="h5">Upload CSV</p>
+  <div
+    class="drag-zone text-center p-4"
+    [appDragDrop]="dragDropEnabled"
+    (dropped)="handleFileDrop($event)"
+  >
+    <p class="h5">Select a CSV file to upload</p>
+    <p>or drag and drop it here</p>
+    <input
+      type="file"
+      [accept]="acceptedFileType"
+      (change)="addFiles(csvDragDropInput.files)"
+      #csvDragDropInput
+      class="visually-hidden"
+    />
+    <!-- <div>
+      {{ fileList | json }}
+    </div> -->
+  </div>
+  <!-- <div for="link-zone">
+    <label for="file-url" class="form-label mt-2">Or Upload from URL</label>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="file-url"
+        #studentDataLink
+        [formControl]="fileLink"
+        aria-describedby="file-url"
+      />
+      <button
+        class="btn btn-sm btn-light m-2 p-2"
+        (click)="onHandleUploadData()"
+      >
+        Upload
+      </button>
+    </div>
+  </div> -->
+</div>
