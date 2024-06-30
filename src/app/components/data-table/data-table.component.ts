@@ -75,7 +75,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
   ) => {
     let csvArr = [];
     console.log('getDataRecordsArrayFromCSVFile', csvRecordsArray);
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 1; i < csvRecordsArray.length; i++) {
       let currentRecord = (<string>csvRecordsArray[i]).split(',');
       // console.log('length check', currentRecord.length, headerLength);
       // if (currentRecord.length == headerLength) {
