@@ -93,15 +93,22 @@ export class FileUploadComponent {
     }
   }
   onHandleUploadData = () => {
-    console.log('link ', this.fileLink.value);
-    this.csvLinkSubscription = this.sharedService
-      .getCSV(this.fileLink.value)
-      .subscribe((data) => {
-        if (data) {
-          this.sendData(data);
-        }
-      });
+    let fileLink = this.fileLink.value;
+    if (this.isValidCSVFile(fileLink)) {
+      this.csvLinkSubscription = this.sharedService
+        .getCSV(fileLink)
+        .subscribe((data) => {
+          if (data) {
+            console.log(data);
+            let csvRecordsArray = (<string>data).split(',,,');
+            this.sendData(csvRecordsArray);
+          }
+        });
+    }
   };
+  isValidCSVFile(fileLink: any) {
+    return fileLink.endsWith('.csv');
+  }
   ngOnDestroy() {
     if (this.csvLinkSubscription) {
       this.csvLinkSubscription.unsubscribe();

@@ -7,7 +7,9 @@
     <div class="col-md-6">Error</div>
     <div class="col-md-6">{{ errorCount }}</div>
   </div>
-  @for(error of errorsList;track error){
+  @if(errorCount==0){
+  <div class="alert alert-success text-center mt-5">Imported Successfully!</div>
+  } @for(error of errorsList;track error){
   <div class="alert alert-danger">
     {{ error }}
   </div>
