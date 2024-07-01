@@ -23,8 +23,8 @@ export class DataTableComponent implements OnInit, OnDestroy {
   public records: any[] = [];
   public errorList: any[] = [];
   public errorCount = 0;
-  public currentErrorCount = 0;
   public correctCount = 0;
+  public currentErrorCount = 0;
   constructor(private sharedService: SharedService, private router: Router) {}
   ngOnInit(): void {
     console.log('oninit');
@@ -60,7 +60,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
       this.records = this.getDataRecordsArrayFromCSVFile(files, 6);
       this.dataTable = this.records;
 
-      this.sharedService.errorCount = this.currentErrorCount;
+      this.sharedService.errorCount = this.errorCount;
       this.sharedService.errorList = this.errorList;
 
       this.sharedService.correctCount = this.correctCount;
@@ -82,9 +82,10 @@ export class DataTableComponent implements OnInit, OnDestroy {
         currentRecord.length > 0 &&
         csvRecordsArray[i] != ',,,,,,' &&
         csvRecordsArray[i] != ',,,,,,,,,,,,,,,,,,,,,,,,' &&
+        csvRecordsArray[i] != ',,,,,,,,,,, ,,,,,,,,,,,,,' &&
         csvRecordsArray[i]
       ) {
-        console.log('inside currentRecord', csvRecordsArray[i]);
+        console.log('inside currentRecord', csvRecordsArray[57]);
         this.currentErrorCount = 0;
         let csvRecord: CSVRecord = new CSVRecord();
         csvRecord.name =
@@ -112,8 +113,8 @@ export class DataTableComponent implements OnInit, OnDestroy {
             ? this.isValidGPA(i, 5, currentRecord[5].trim())
             : currentRecord[5];
         csvArr.push(csvRecord);
-        // console.log('currentErrorCount', this.currentErrorCount);
-        // console.log('correctCount', this.correctCount);
+        console.log('errorCount', this.errorCount);
+        console.log('correctCount', this.correctCount);
         if (this.currentErrorCount == 0) this.correctCount++;
       }
       // }
@@ -128,8 +129,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
     return 'false';
   }
   addErrorList = (message: string) => {
+    this.errorCount++;
     this.currentErrorCount++;
-    console.log('error', this.sharedService.errorCount);
+    // console.log('error', this.sharedService.errorCount);
     this.errorList.push(message);
   };
   isValidPhoneNumber(rowNumber: number, index: number, phoneNumber: string) {
@@ -158,9 +160,12 @@ export class DataTableComponent implements OnInit, OnDestroy {
     let convertedFloat;
     try {
       convertedFloat = parseFloat(gpa);
-      console.log('convertedFloat', convertedFloat);
-      if (convertedFloat > 0.0 && convertedFloat <= 10.0) return convertedFloat;
-      else
+      if (convertedFloat && convertedFloat > 0.0 && convertedFloat <= 10.0)
+        return convertedFloat;
+      else if (Number.isNaN(convertedFloat)) {
+        this.addErrorList(`row[${rowNumber}][${index}]- shouldn't be empty`);
+        return '';
+      } else
         this.addErrorList(
           `row[${rowNumber}][${index}]- gpa should be greater than 0.0 and lesser than 10.0`
         );
@@ -170,7 +175,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
         `row[${rowNumber}][${index}]- gpa should be a decimal number`
       );
 
-      return gpa;
+      return '';
     }
   }
   isValidCSVFile(file: any) {
