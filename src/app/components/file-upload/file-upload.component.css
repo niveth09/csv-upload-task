@@ -2,10 +2,10 @@
     position: relative;
     width: 100%;
     height: 50%;
-    border: 1px solid rgba(204, 204, 204, 0.5);
+    /* border: 1px solid rgba(204, 204, 204, 0.5); */
     display: block;
     cursor: pointer;
-  
+    border:2px dashed rgb(162,171,184);
     
   }
   .file-upload {
@@ -21,7 +21,7 @@
   .drag-zone .dragging {
     background-color: #cdcdff;
     border: 3px dashed #999999;
-    /* border:1px dashed rgb(162,171,184) */
+    
   }
 
   .drag-zone:focus-within {

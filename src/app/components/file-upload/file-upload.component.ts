@@ -36,9 +36,8 @@ export class FileUploadComponent {
   }
 
   addFiles(files: FileList | any): void {
-    console.log(files);
     this.filesChanged.emit(files);
-    console.log(files);
+
     this.setFileList(files);
   }
 
@@ -72,6 +71,8 @@ export class FileUploadComponent {
       reader.onerror = () => {
         console.log('error is occurred while reading file!');
       };
+    } else {
+      this.notAcceptedDataType = true;
     }
 
     // console.log(file);

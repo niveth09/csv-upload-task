@@ -5,7 +5,7 @@
   </div>
   }
   <p class="h5">Upload CSV</p>
-  <div
+  <label
     class="drag-zone text-center p-4"
     [appDragDrop]="dragDropEnabled"
     (dropped)="handleFileDrop($event)"
@@ -19,11 +19,8 @@
       #csvDragDropInput
       class="visually-hidden"
     />
-    <!-- <div>
-      {{ fileList | json }}
-    </div> -->
-  </div>
-  <!-- <div for="link-zone">
+  </label>
+  <div for="link-zone">
     <label for="file-url" class="form-label mt-2">Or Upload from URL</label>
     <div class="input-group mb-3">
       <input
@@ -35,11 +32,11 @@
         aria-describedby="file-url"
       />
       <button
-        class="btn btn-sm btn-light m-2 p-2"
+        class="btn btn-md btn-light m-2 p-2"
         (click)="onHandleUploadData()"
       >
         Upload
       </button>
     </div>
-  </div> -->
+  </div>
 </div>
